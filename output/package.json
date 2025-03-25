@@ -6,20 +6,31 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
+    "dev:staging": "NODE_ENV=staging next dev",
+    "dev:prod": "NODE_ENV=production next dev",
+    "build:staging": "NODE_ENV=staging next build",
+    "build:prod": "NODE_ENV=production next build",
+    "start:staging": "NODE_ENV=staging next start",
+    "start:prod": "NODE_ENV=production next start"
   },
   "dependencies": {
-    "next": "14.1.0",
+    "@types/winston": "^2.4.4",
+    "next": "^14.1.0",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "winston": "^3.17.0"
   },
   "devDependencies": {
     "@types/node": "^20.17.27",
-    "@types/react": "^18.2.0",
-    "@types/react-dom": "^18.2.0",
-    "typescript": "^5.3.2",
+    "@types/react": "^18.3.20",
+    "@types/react-dom": "^18.3.5",
     "autoprefixer": "^10.4.17",
     "postcss": "^8.4.35",
-    "tailwindcss": "^3.4.1"
+    "tailwindcss": "^3.4.1",
+    "typescript": "^5.3.2"
   }
-} 
+}
