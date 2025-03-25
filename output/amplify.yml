@@ -1,16 +1,27 @@
 version: 1
+appRoot: output
 frontend:
   phases:
     preBuild:
       commands:
-        - npm --prefix output ci
+        - npm ci
+        - cp .env.production .env.local
     build:
       commands:
-        - npm --prefix output run build
+        - NODE_ENV=production npm run build
   artifacts:
-    baseDirectory: output/out
+    baseDirectory: out
     files:
       - '**/*'
   cache:
     paths:
-      - output/node_modules/**/* 
+      - node_modules/**/*
+  customHeaders:
+    - pattern: '**/*'
+      headers:
+        - key: 'Cache-Control'
+          value: 'public, max-age=31536000, immutable'
+    - pattern: '_next/static/**/*'
+      headers:
+        - key: 'Cache-Control'
+          value: 'public, max-age=31536000, immutable' 
