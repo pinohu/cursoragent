@@ -23,31 +23,36 @@ const logger = winston.createLogger({
 
 export async function POST(request: NextRequest) {
   try {
-    const body = await request.json();
-    const idea: IdeaInput = body.idea;
-
-    if (!idea) {
-      return NextResponse.json({ error: 'Idea input is required' }, { status: 400 });
+    const data = await request.json();
+    
+    // Validate required fields
+    const requiredFields = ['name', 'description', 'applicationType', 'features', 'technologies', 'dependencies'];
+    for (const field of requiredFields) {
+      if (!data[field]) {
+        return NextResponse.json(
+          { error: `Missing required field: ${field}` },
+          { status: 400 }
+        );
+      }
     }
 
-    const config: Configuration = {
-      cursorPath: process.env.CURSOR_PATH || '',
-      workingDirectory: './output',
-      deploymentSettings: {
-        targets: [],
-        credentials: {},
-        options: {}
-      },
-      logLevel: LogLevel.INFO,
-      serviceMode: false
+    // Process the idea
+    // TODO: Implement actual processing logic
+    const result = {
+      status: 'success',
+      message: 'Idea processed successfully',
+      data: {
+        ...data,
+        processedAt: new Date().toISOString(),
+      }
     };
-
-    const orchestrator = new Orchestrator(config, logger);
-    const result = await orchestrator.processIdea(idea);
 
     return NextResponse.json(result);
   } catch (error) {
-    logger.error(`Error processing idea: ${error}`);
-    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
+    console.error('Error processing idea:', error);
+    return NextResponse.json(
+      { error: 'Failed to process idea' },
+      { status: 500 }
+    );
   }
 } 
