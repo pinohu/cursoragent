@@ -3,6 +3,7 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import { validateEnvironment } from './utils/env'
 import { ErrorBoundary } from './components/ErrorBoundary'
+import { AnalyticsProvider } from './utils/analytics'
 
 // Validate environment variables at startup
 validateEnvironment();
@@ -26,11 +27,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <ErrorBoundary>
-          <main className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
-            {children}
-          </main>
-        </ErrorBoundary>
+        <AnalyticsProvider>
+          <ErrorBoundary>
+            <main className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
+              {children}
+            </main>
+          </ErrorBoundary>
+        </AnalyticsProvider>
       </body>
     </html>
   )

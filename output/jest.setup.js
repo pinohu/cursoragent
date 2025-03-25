@@ -1,3 +1,5 @@
+import '@testing-library/jest-dom';
+
 // Mock environment variables for testing
 process.env.NODE_ENV = 'test';
 process.env.NEXT_PUBLIC_APP_NAME = 'Test App';
