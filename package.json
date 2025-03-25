@@ -44,7 +44,7 @@
     "typescript": "^5.3.2"
   },
   "engines": {
-    "node": ">=14.0.0"
+    "node": "18.x"
   },
   "files": [
     "dist",
@@ -54,10 +54,10 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/yourusername/cursor-composer-automation.git"
+    "url": "https://github.com/pinohu/cursoragent.git"
   },
   "bugs": {
-    "url": "https://github.com/yourusername/cursor-composer-automation/issues"
+    "url": "https://github.com/pinohu/cursoragent/issues"
   },
-  "homepage": "https://github.com/yourusername/cursor-composer-automation#readme"
+  "homepage": "https://github.com/pinohu/cursoragent#readme"
 }
