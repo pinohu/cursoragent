@@ -1,18 +1,19 @@
 {
   "version": 2,
-  "builds": [
-    {
-      "src": "package.json",
-      "use": "@vercel/next"
-    }
-  ],
-  "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "/$1"
-    }
-  ],
+  "buildCommand": "npm run build",
+  "devCommand": "npm run dev",
+  "installCommand": "npm install",
+  "framework": "nextjs",
+  "regions": ["iad1"],
   "env": {
-    "NODE_ENV": "production"
+    "NEXT_PUBLIC_APP_NAME": "Cursor Agent",
+    "NEXT_PUBLIC_APP_DESCRIPTION": "AI-powered code generation and automation tool",
+    "NEXT_PUBLIC_API_URL": "https://cursoragent.vercel.app",
+    "LOG_LEVEL": "warn",
+    "NEXT_PUBLIC_MAX_UPLOAD_SIZE": "1000",
+    "RATE_LIMIT_REQUESTS": "100",
+    "RATE_LIMIT_WINDOW_MS": "900000",
+    "ENABLE_LOGGING": "true",
+    "LOG_TO_FILE": "false"
   }
 } 
