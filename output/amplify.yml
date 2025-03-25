@@ -10,10 +10,9 @@ applications:
           commands:
             - npm run build
       artifacts:
-        baseDirectory: .next/standalone/output
+        baseDirectory: .next
         files:
           - '**/*'
-        discard-paths: yes
       cache:
         paths:
           - node_modules/**/*
@@ -26,4 +25,5 @@ applications:
           headers:
             - key: 'Cache-Control'
               value: 'public, max-age=31536000, immutable'
-    appRoot: output 
+    appRoot: output
+    buildPath: output 

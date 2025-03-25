@@ -1,60 +1,39 @@
 export function validateEnvironment(): void {
-  const requiredEnvVars = {
-    // Application Settings
-    NEXT_PUBLIC_APP_NAME: 'Application name is required',
-    NEXT_PUBLIC_APP_DESCRIPTION: 'Application description is required',
-    NEXT_PUBLIC_API_URL: 'API URL is required',
-
-    // Cursor Configuration
-    CURSOR_PATH: 'Cursor executable path is required',
-
-    // Logging
-    LOG_LEVEL: 'Log level must be one of: error, warn, info, debug',
-
-    // Security
-    NEXT_PUBLIC_MAX_UPLOAD_SIZE: 'Maximum upload size is required',
-
-    // Rate Limiting
-    RATE_LIMIT_REQUESTS: 'Rate limit request count is required',
-    RATE_LIMIT_WINDOW_MS: 'Rate limit window duration is required',
-  } as const;
-
-  const missingVars: string[] = [];
-
-  // Check for missing variables
-  Object.entries(requiredEnvVars).forEach(([key, message]) => {
-    if (!process.env[key]) {
-      missingVars.push(`${key}: ${message}`);
-    }
-  });
-
-  // Validate LOG_LEVEL values
-  if (
-    process.env.LOG_LEVEL &&
-    !['error', 'warn', 'info', 'debug'].includes(process.env.LOG_LEVEL)
-  ) {
-    missingVars.push('LOG_LEVEL: Invalid log level specified');
-  }
-
-  // Validate numeric values
-  const numericVars = [
-    'NEXT_PUBLIC_MAX_UPLOAD_SIZE',
-    'RATE_LIMIT_REQUESTS',
-    'RATE_LIMIT_WINDOW_MS',
+  const requiredVars = [
+    'NEXT_PUBLIC_APP_NAME',
+    'NEXT_PUBLIC_APP_DESCRIPTION',
+    'NEXT_PUBLIC_API_URL',
+    'NEXT_PUBLIC_ENABLE_ANALYTICS'
   ];
 
-  numericVars.forEach((key) => {
-    const value = process.env[key];
-    if (value && isNaN(Number(value))) {
-      missingVars.push(`${key}: Must be a valid number`);
-    }
-  });
+  const missingVars = requiredVars.filter(varName => !process.env[varName]);
 
   if (missingVars.length > 0) {
-    throw new Error(
-      'Missing or invalid environment variables:\n' + missingVars.join('\n')
-    );
+    throw new Error(`Missing required environment variables: ${missingVars.join(', ')}`);
   }
+
+  // Validate API URL format
+  try {
+    new URL(process.env.NEXT_PUBLIC_API_URL!);
+  } catch (error) {
+    throw new Error('Invalid NEXT_PUBLIC_API_URL format');
+  }
+}
+
+export function getEnvironment(): string {
+  return process.env.NODE_ENV || 'development';
+}
+
+export function isProduction(): boolean {
+  return getEnvironment() === 'production';
+}
+
+export function isDevelopment(): boolean {
+  return getEnvironment() === 'development';
+}
+
+export function isTest(): boolean {
+  return getEnvironment() === 'test';
 }
 
 export function getEnvVar(key: keyof NodeJS.ProcessEnv): string {
