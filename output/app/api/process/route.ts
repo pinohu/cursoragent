@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 import * as winston from 'winston';
+import { analytics } from '../../utils/analytics';
 
 // Define types
 type LogLevel = 'error' | 'warn' | 'info' | 'debug';
@@ -72,6 +73,10 @@ function validateEnvironment(): string | null {
 
 export async function POST(request: NextRequest) {
   try {
+    const { idea } = await request.json();
+
+    analytics.trackEvent('process_idea', { idea });
+
     // Validate environment
     const envError = validateEnvironment();
     if (envError) {
@@ -98,12 +103,10 @@ export async function POST(request: NextRequest) {
     rateLimit.current.set(ip, userRequests + 1);
     setTimeout(() => rateLimit.current.delete(ip), rateLimit.windowMs);
 
-    const data = await request.json() as IdeaData;
-    
     // Validate request size
     const maxSize = parseInt(process.env.NEXT_PUBLIC_MAX_UPLOAD_SIZE || '10485760');
-    if (JSON.stringify(data).length > maxSize) {
-      logger.warn('Request payload too large:', { size: JSON.stringify(data).length, maxSize });
+    if (JSON.stringify(idea).length > maxSize) {
+      logger.warn('Request payload too large:', { size: JSON.stringify(idea).length, maxSize });
       return NextResponse.json(
         { error: 'Request payload too large' },
         { status: 413 }
@@ -113,7 +116,7 @@ export async function POST(request: NextRequest) {
     // Validate required fields
     const requiredFields = ['name', 'description', 'applicationType', 'features', 'technologies', 'dependencies'] as const;
     for (const field of requiredFields) {
-      if (!data[field]) {
+      if (!idea[field]) {
         logger.warn('Missing required field:', field);
         return NextResponse.json(
           { error: `Missing required field: ${field}` },
@@ -123,28 +126,36 @@ export async function POST(request: NextRequest) {
     }
 
     logger.info('Processing idea request', { 
-      name: data.name, 
-      applicationType: data.applicationType 
+      name: idea.name, 
+      applicationType: idea.applicationType 
     });
 
     // Process the idea
     const result = {
-      status: 'success',
+      success: true,
       message: 'Idea processed successfully',
       data: {
-        ...data,
-        processedAt: new Date().toISOString(),
-        betaFeatures: process.env.NEXT_PUBLIC_ENABLE_BETA_FEATURES === 'true'
+        idea,
+        timestamp: new Date().toISOString()
       }
     };
 
     logger.info('Idea processed successfully', { 
-      name: data.name, 
-      processedAt: result.data.processedAt 
+      name: idea.name, 
+      processedAt: result.data.timestamp 
+    });
+
+    analytics.trackEvent('idea_processed', { 
+      idea,
+      success: true
     });
 
     return NextResponse.json(result);
   } catch (error) {
+    analytics.trackEvent('process_error', { 
+      error: error instanceof Error ? error.message : 'Unknown error'
+    });
+
     const errorMessage = error instanceof Error ? error.message : 'An unknown error occurred';
     logger.error('Error processing idea:', { error: errorMessage });
     return NextResponse.json(

@@ -1,0 +1,23 @@
+version: 1
+applications:
+  - frontend:
+      phases:
+        preBuild:
+          commands:
+            - cd output
+            - npm ci
+            - npm install -g next
+        build:
+          commands:
+            - npm run build
+        postBuild:
+          commands:
+            - npm run export
+      artifacts:
+        baseDirectory: output/out
+        files:
+          - '**/*'
+      cache:
+        paths:
+          - output/node_modules/**/*
+    appRoot: . 

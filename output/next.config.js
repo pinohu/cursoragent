@@ -2,9 +2,14 @@
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
-  output: 'standalone',
+  output: 'export',  // Enable static exports
+  images: {
+    unoptimized: true // Required for static exports
+  },
   experimental: {
-    serverActions: true,
+    // AWS Amplify specific optimizations
+    optimizeCss: true,
+    optimizePackageImports: ['@vercel/analytics']
   }
 }
 
