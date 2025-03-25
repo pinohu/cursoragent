@@ -1,0 +1,32 @@
+# Tests
+tests/
+test-output/
+test-integration-output/
+
+# Source files (only dist is needed)
+src/
+
+# Development configs
+.github/
+.vscode/
+.editorconfig
+.eslintrc
+.prettierrc
+tsconfig.json
+
+# Logs
+*.log
+
+# Git files
+.git/
+.gitignore
+
+# CI/CD
+.travis.yml
+.gitlab-ci.yml
+.circleci/
+
+# Misc
+.DS_Store
+Thumbs.db
+*.tgz

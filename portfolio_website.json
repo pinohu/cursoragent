@@ -1,0 +1,25 @@
+{
+  "title": "Personal Portfolio Website",
+  "description": "Create a modern portfolio website for a software developer to showcase their projects, skills, and professional experience. The website should be visually appealing and optimized for performance.",
+  "type": "web_app",
+  "features": [
+    "Responsive design for all devices",
+    "Home page with introduction and featured projects",
+    "Projects page with filtering by technology/category",
+    "About page with professional background and skills",
+    "Contact form with validation",
+    "Blog section for technical articles",
+    "Dark/light mode toggle",
+    "Smooth page transitions and animations"
+  ],
+  "frameworks": [
+    "Next.js",
+    "TypeScript",
+    "Tailwind CSS",
+    "Framer Motion"
+  ],
+  "deploymentTarget": [
+    "vercel"
+  ],
+  "additionalContext": "The portfolio should have a clean, minimalist design that emphasizes content and showcases technical skills. Performance is important - aim for high Lighthouse scores. Include a custom domain setup process in the deployment instructions. The site should be easily customizable for the user to update with their own information."
+}

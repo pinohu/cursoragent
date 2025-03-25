@@ -1,0 +1,26 @@
+{
+  "title": "CLI Tool for Data Analysis",
+  "description": "Create a command-line tool that analyzes CSV and JSON data files, providing statistical insights, data visualization, and export capabilities.",
+  "type": "cli_tool",
+  "features": [
+    "Import data from CSV and JSON files",
+    "Basic statistical analysis (mean, median, mode, standard deviation)",
+    "Data filtering and transformation options",
+    "Generate visualizations (histograms, scatter plots, pie charts)",
+    "Export results to various formats (CSV, JSON, PDF)",
+    "Batch processing of multiple files",
+    "Interactive mode with command suggestions",
+    "Support for large datasets with efficient memory usage"
+  ],
+  "frameworks": [
+    "Python",
+    "Click",
+    "Pandas",
+    "Matplotlib",
+    "NumPy"
+  ],
+  "deploymentTarget": [
+    "custom"
+  ],
+  "additionalContext": "The tool should be user-friendly with clear documentation and help commands. Performance is important when handling large datasets. Include comprehensive error handling with informative messages. The tool should be installable via pip and have cross-platform compatibility (Windows, macOS, Linux)."
+}

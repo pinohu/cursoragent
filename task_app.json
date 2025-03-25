@@ -1,0 +1,24 @@
+{
+  "title": "Task Management App",
+  "description": "Create a simple task management application that allows users to create, view, edit, and delete tasks. The application should have a clean, modern interface and be responsive for both desktop and mobile devices.",
+  "type": "web_app",
+  "features": [
+    "User authentication (sign up, login, logout)",
+    "Create new tasks with title, description, due date, and priority",
+    "View all tasks in a list with sorting and filtering options",
+    "Edit existing tasks",
+    "Delete tasks",
+    "Mark tasks as complete",
+    "Responsive design for mobile and desktop"
+  ],
+  "frameworks": [
+    "React",
+    "Node.js",
+    "Express",
+    "MongoDB"
+  ],
+  "deploymentTarget": [
+    "vercel"
+  ],
+  "additionalContext": "The application should have a clean, minimalist design with a focus on usability. The color scheme should be professional but not boring, perhaps using a primary color of blue or green. The application should be intuitive to use without requiring a tutorial or extensive documentation."
+}

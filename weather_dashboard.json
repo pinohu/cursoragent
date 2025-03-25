@@ -1,0 +1,24 @@
+{
+  "title": "Weather Dashboard",
+  "description": "Create a weather dashboard application that displays current weather conditions and forecasts for multiple locations. Users should be able to search for locations and save their favorite cities.",
+  "type": "web_app",
+  "features": [
+    "Search for locations by city name or zip code",
+    "Display current weather conditions (temperature, humidity, wind speed, etc.)",
+    "Show 5-day forecast",
+    "Save favorite locations",
+    "Automatic location detection based on user's IP",
+    "Toggle between Celsius and Fahrenheit",
+    "Responsive design for all devices",
+    "Weather alerts and notifications"
+  ],
+  "frameworks": [
+    "React",
+    "Tailwind CSS",
+    "OpenWeather API"
+  ],
+  "deploymentTarget": [
+    "netlify"
+  ],
+  "additionalContext": "The dashboard should have a modern, clean interface with weather-appropriate visuals (sunny background for clear days, animated rain for rainy days, etc.). Focus on making the information easy to read at a glance while providing detailed data when needed."
+}

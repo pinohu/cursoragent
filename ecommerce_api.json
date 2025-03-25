@@ -1,0 +1,25 @@
+{
+  "title": "E-commerce API",
+  "description": "Create a RESTful API for an e-commerce platform that handles products, users, orders, and payments. The API should be secure, scalable, and well-documented.",
+  "type": "api",
+  "features": [
+    "User authentication and authorization with JWT",
+    "Product management (CRUD operations)",
+    "Shopping cart functionality",
+    "Order processing and history",
+    "Payment integration (Stripe)",
+    "Search and filtering capabilities",
+    "Rate limiting and security features",
+    "Comprehensive API documentation"
+  ],
+  "frameworks": [
+    "Node.js",
+    "Express",
+    "MongoDB",
+    "Mongoose"
+  ],
+  "deploymentTarget": [
+    "aws"
+  ],
+  "additionalContext": "The API should follow RESTful best practices and include proper error handling with appropriate status codes. All endpoints should be thoroughly documented using Swagger/OpenAPI. Include unit and integration tests to ensure reliability. The database schema should be optimized for e-commerce operations with proper indexing."
+}
