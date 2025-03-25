@@ -10,9 +10,10 @@ applications:
           commands:
             - npm run build
       artifacts:
-        baseDirectory: .next
+        baseDirectory: .next/standalone/output
         files:
           - '**/*'
+        discard-paths: yes
       cache:
         paths:
           - node_modules/**/*
