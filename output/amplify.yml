@@ -6,18 +6,14 @@ applications:
           commands:
             - cd output
             - npm ci
-            - npm install -g next
         build:
           commands:
             - npm run build
-        postBuild:
-          commands:
-            - npm run export
       artifacts:
-        baseDirectory: output/out
+        baseDirectory: out
         files:
           - '**/*'
       cache:
         paths:
-          - output/node_modules/**/*
-    appRoot: . 
+          - node_modules/**/*
+    appRoot: output 
